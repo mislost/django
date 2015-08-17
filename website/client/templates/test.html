@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head><title>jQuery</title>
+<!--<meta http-equiv="refresh" content="5">--!>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+<link rel="stylesheet" href="css/test.css" type="text/css" />
+</head>
+<body>
+
+<table id="table" border="1">
+<tr>
+<td nowrap="value"; style="font-size:20px; background: #6FB7B7"; align="center"; ><strong>主机名</strong></td>
+	<td nowrap="value"; style="font-size:20px; background: #6FB7B7"; align="center"; ><strong>客户信息</strong></td>
+</tr>
+</table>
+
+<script>
+var banks = {{ banks|safe }};
+var dict = {{ Dict|safe }};
+var hostname = "";
+var keys = new Array();
+for (i in dict){
+	keys.push(i);
+};
+keys = keys.sort();
+$(document).ready(function(){
+	for (var key=0;key<keys.length;key++) {
+		hostname = keys[key];
+		$("#table").append("<tr id=" + hostname + "></tr>");
+		$("#"+hostname).append("<td>" + hostname + "</td>");
+		var client_info = "";
+		for (var i=0;i<dict[hostname].length;i++){
+			if (dict[hostname][i]['login'] === "false")
+			{
+      				client_info = client_info + '<div style="width:960px; height:200px;background-color:#FF0000">' + "[" + banks[dict[hostname][i]["bank_flag"]] + "]" + dict[hostname][i]["card_display_name"] + "</div>";
+			}
+			else
+			{
+				client_info = client_info + '<div style="width:960px; height:200px;background-color:#32CD32">' + "[" + banks[dict[hostname][i]["bank_flag"]] + "]" + dict[hostname][i]["card_display_name"]  + "</div>";
+			};
+		};
+		$("#"+hostname).append("<td>" + client_info + "</td>");
+	};
+});
+
+</script>
+
+</body>
+</html>

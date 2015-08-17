@@ -1,0 +1,57 @@
+<html>
+<head><title>JavaScript测试页面</title></head>
+<body>
+<table border="1">
+<tr>
+	<td>Hostname</td>
+	<td>Client_info</td>
+</tr>	
+</table>
+</body>
+<script>
+//创建createrow函数,通过两个参数生成一行数据
+function createrow(hostname,client_infos) {
+	//定位tbody,创建一个tr元素
+	var t  = document.getElementsByTagName("tbody")[0];
+	var tr = document.createElement("tr")
+	//创建两个td元素
+	var td_1 = document.createElement("td");
+	var td_2 = td_1.cloneNode(false);
+	//创建td中的Text内容
+	var td_hostname = document.createTextNode(hostname);
+	var td_clientinfo = document.createTextNode(client_infos);
+	//将td_1添加到tr中
+	td_1.appendChild(td_hostname);
+	tr.appendChild(td_1);
+	//将td_2添加到tr中
+	td_2.appendChild(td_clientinfo);
+	tr.appendChild(td_2);
+	//将整个tr添加到tbody中
+	t.appendChild(tr);
+}
+
+//创建createtable函数,遍历dict,生成每一行数据
+function createtable(){
+	//获取Django传递来的Dict
+	dict = {{ Dict|safe }};
+	//alert(dict["S0001"][0]["bank_flag"]);
+	//遍历dict
+	for(var key in dict){
+		var hostname = "";
+		hostname = key ;
+		var client_infos = "";
+		//遍历每个hostname的client_infos,并生成需要显示的字符串
+		for(var i=0;i<dict[hostname].length;i++){
+			client_infos = client_infos + dict[hostname][i]["bank_flag"] + dict[hostname][i]["card_display_name"] + " ";
+		}
+		//调用createrow函数生成一行数据
+		createrow(hostname,client_infos);
+	}
+}
+//Main
+createtable();
+
+
+</script>
+
+</html>

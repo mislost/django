@@ -1,0 +1,38 @@
+<html>
+<body>
+<head>
+<title>
+这是一个标题
+</title>
+Json查询
+<br />
+<hr>
+</head>
+<p>Mislost</p>
+
+
+<script>
+//dict = {'Msilost':'27','Chenlong':'3'};
+Dict = {{ Dict|safe }};
+var str = "";
+str = str + "<table border='1'>";
+for(var key in Dict){
+	var client_info = "";
+	for(var i=0;i<Dict[key].length;i++){
+		client_info = client_info + " " + Dict[key][i]['bank_flag'] + Dict[key][i]['card_display_name'] + " ";
+	}
+	str = str + "<tr><td>" + key + "</td>" + "<td>" + client_info + "</td></tr>";
+}
+str = str + "</table>";
+//alert(client_info);
+document.write(str);
+document.getElementsByTagName("p")[0].innerHTML = "被改变的内容";
+document.getElementsByTagName("p")[0].style.color = "red";
+
+</script>
+
+
+
+
+</body>
+</html>

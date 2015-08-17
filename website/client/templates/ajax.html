@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body onload="Myshow()">
+<script>
+function Result(){
+$(document).ready(function(){
+        $.ajax({url: "test.html", success: function(result){
+            $("#t1").html(result);
+        }});
+});
+};
+
+function Myshow(){
+timer = setInterval("Result()",1000);
+}
+</script>
+
+<table id="t1">
+</table>
+
+</body>
+</html>
+
