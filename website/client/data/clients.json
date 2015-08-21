@@ -5,7 +5,7 @@
  "card_loginname": "myname",
  "card_password" : "mypasswd",
  "last_active" : "149211231", 
- "login" : "false"
+ "login" : "true"
 },
 {
  "bank_flag" : "ICBC",

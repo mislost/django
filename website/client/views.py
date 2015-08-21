@@ -22,19 +22,21 @@ def test(request):
 def Datatables(request):
     f =  file('/root/core/website/client/data/clients.json')
     s = json.load(f)
-    List = []
+    servers = { } 
     banks = {"CMB":u"招","ABC":u"农","ICBC":u"工","CCB":u"建","BCM":u"交"}
     for i in s:
         hostname = i 
         client_infos = s[i]
         clients = ""
+        server = { } 
+        bank_id = 0
         for j in client_infos:
             bank = banks[j['bank_flag']]
             name = j['card_display_name']
-            clients = clients + bank + ":"+  name + "  " 
-        l = [hostname,clients]
-        List.append(l)
-    return render(request,'data.html',{'List':json.dumps(List)})
+            server[bank_id] =  { "bank_flag" : bank , "name" : name } 
+            bank_id += 1
+        servers[hostname] = server
+    return render(request,'data.html',{'servers':json.dumps(servers)})
 
 def Ajax(request):
     return render(request,'ajax.html')
