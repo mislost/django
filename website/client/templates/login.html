@@ -3,8 +3,9 @@
 <title>Login</title>
 </head>
 <body>
-<form id="login_form" method="POST" action="">
+<form id="login_form" method="POST" action="/login">
 {%csrf_token%}
+<input type="hidden" name="next" value="{{ next }}" />
 Username:
 <input type="text" name="username" value="" id="username" size="50"/>
 <br/>

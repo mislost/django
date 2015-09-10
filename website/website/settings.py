@@ -46,6 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ #   'stronghold.middleware.LoginRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'website.urls'
@@ -56,13 +57,23 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.mysql',
+	'NAME': 'ope',
+	'USER': 'root',
+	'PASSWORD': '60Bo@db.com',
+	'HOST': 'localhost',
+	'PORT': '3306'
     }
 }
-
+#
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -82,3 +93,10 @@ CSS_DIR =  BASE_DIR + '/static/css'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = BASE_DIR + '/static/'
+LOGIN_URL = 'accounts/login'
+#LOGIN_EXEMPT_URLS = (
+#    r'^about\.html$',
+#    r'^legal/', # allow the entire /legal/* subsection
+#  )
+#STRONGHOLD_DEFAULTS = True
+
